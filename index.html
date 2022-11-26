@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+      body{
+          margin:10px;
+      }
+      .row{
+        border: 1px solid black;
+        
+      }
+      .col{
+        border: 1px solid black;
+      }
+
+
+    </style>
+
+</head>
+<body>
+    <div style="display:flex; flex-direction:column;width:1300px;height:300px;background-color:blue;justify-content: center;align-items: center;">
+       <h2 style="color: white;">California Cafe Directory</h2> 
+       <input type="inputtext" style="width:700px;border-radius:10px;height:40px;margin-top: 1em;text-align: center;" placeholder="Search Your Favourite Cafes!" />     
+
+    </div>
+
+    <div style="width:1200px;height:1000px;margin:30px;">
+      <div class="container">
+        <div class="row" style="background-color:black;height:80px;border-top-right-radius:10px;border-top-left-radius:10px;color:white;display: flex;justify-content: center;align-items: center;">
+          <div class="col">
+            <div>
+              Cafe Name
+              
+            </div>
+          </div>
+          <div class="col">
+            Address
+          </div>
+          <div class="col">
+            Postal Code
+          </div>
+          <div class="col">
+            Lat
+          </div>
+          <div class="col">
+            Long
+          </div>
+        </div>
+        
+
+        <div class="row">
+          <div class="col">
+            <div class="show">
+  
+            </div>
+          </div>
+          <div class="col">
+            <div class="show1">
+
+            </div>
+            
+          </div>
+          <div class="col">
+            <div class="show2">
+
+            </div>
+            
+          </div>
+          <div class="col">
+            <div class="show3">
+
+            </div>
+            
+          </div>
+          <div class="col">
+            <div class="show4">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+        
+
+        
+  
+        
+          
+    </div>
+
+    
+
+
+
+
+
+  </div>
+
+</body>
+<script>
+    let datafile1 = fetch("https://raw.githubusercontent.com/debojyoti/places-fake-rest-api/master/cafes.json");
+    let datafile2 = fetch("https://raw.githubusercontent.com/debojyoti/places-fake-rest-api/master/places.json");
+
+    Promise.all([datafile1, datafile2]).then(files=>{
+        return Promise.all(files.map(r=> r.json()));
+    }).then(([{...datafile1}, {...datafile2}])=>{
+
+        
+    
+       const ashu = document.getElementsByClassName("show")[0];
+
+       const ashu1 = document.getElementsByClassName("show1")[0];
+
+       const ashu2 = document.getElementsByClassName("show2")[0];
+
+       const ashu3 = document.getElementsByClassName("show3")[0];
+
+       const ashu4 = document.getElementsByClassName("show4")[0];
+
+        datafile1.cafes.forEach((product, index) =>{
+            let p = document.createElement("p");
+          
+            let pText = document.createTextNode(`${product.name}`);
+             p.appendChild(pText);
+
+             ashu.appendChild(p);
+            
+
+            console.log( product.name);
+        });
+
+        
+
+        datafile2.places.forEach((product, index)=>{
+          let p = document.createElement("p");
+          let pText = document.createTextNode(`${product.locality}`);
+          p.appendChild(pText);
+          ashu1.appendChild(p);
+
+          let p1 = document.createElement("p");
+          let p1Text = document.createTextNode(`${product.postal_code}`);
+          p1.appendChild(p1Text);
+          ashu2.appendChild(p1);
+
+          let p2 = document.createElement("p");
+          let p2Text = document.createTextNode(`${product.lat}`);
+          p2.appendChild(p2Text);
+          ashu3.appendChild(p2);
+
+          let p3 = document.createElement("p");
+          let p3Text = document.createTextNode(`${product.long}`);
+          p3.appendChild(p3Text);
+          ashu4.appendChild(p3);
+
+
+            console.log(product.street_no +" "+ product.locality +" "+ product.postal_code +" "+ product.lat);
+        })
+
+        
+
+        
+        console.log(datafile1.cafes);
+        console.log(datafile2.places);
+    })
+    
+
+
+</script>
+</html>
