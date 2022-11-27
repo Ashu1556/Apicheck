@@ -25,7 +25,7 @@
 <body>
     <div style="display:flex; flex-direction:column;width:1300px;height:300px;background-color:blue;justify-content: center;align-items: center;">
        <h2 style="color: white;">California Cafe Directory</h2> 
-       <input type="inputtext" style="width:700px;border-radius:10px;height:40px;margin-top: 1em;text-align: center;" placeholder="Search Your Favourite Cafes!" />     
+       <input type="inputtext" class="inputtext" style="width:700px;border-radius:10px;height:40px;margin-top: 1em;text-align: center;" placeholder="Search Your Favourite Cafes!" />     
 
     </div>
 
@@ -106,12 +106,14 @@
     let datafile1 = fetch("https://raw.githubusercontent.com/debojyoti/places-fake-rest-api/master/cafes.json");
     let datafile2 = fetch("https://raw.githubusercontent.com/debojyoti/places-fake-rest-api/master/places.json");
 
+
     Promise.all([datafile1, datafile2]).then(files=>{
         return Promise.all(files.map(r=> r.json()));
     }).then(([{...datafile1}, {...datafile2}])=>{
 
         
-    
+     
+       const inputtext = document.getElementsByClassName("inputtext")[0];
        const ashu = document.getElementsByClassName("show")[0];
 
        const ashu1 = document.getElementsByClassName("show1")[0];
@@ -121,18 +123,39 @@
        const ashu3 = document.getElementsByClassName("show3")[0];
 
        const ashu4 = document.getElementsByClassName("show4")[0];
+         inputtext.addEventListener("change" , function(){
+           const value = inputtext.value;
 
-        datafile1.cafes.forEach((product, index) =>{
-            let p = document.createElement("p");
+           datafile1.cafes.forEach((product, index) =>{
+            if(product=== value){
+             let p = document.createElement("p");
           
-            let pText = document.createTextNode(`${product.name}`);
+             let pText = document.createTextNode(`${product.name}`);
              p.appendChild(pText);
 
              ashu.appendChild(p);
+
+            }
+            
             
 
             console.log( product.name);
         });
+           
+
+         })
+
+           datafile1.cafes.forEach((product, index) =>{
+             let p = document.createElement("p");
+          
+               let pText = document.createTextNode(`${product.name}`);
+               p.appendChild(pText);
+
+              ashu.appendChild(p);
+            
+
+               console.log( product.name);
+          });
 
         
 
@@ -164,8 +187,8 @@
         
 
         
-        console.log(datafile1.cafes);
-        console.log(datafile2.places);
+        console.log(datafile1);
+        console.log(datafile2);
     })
     
 
